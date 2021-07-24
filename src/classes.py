@@ -1,6 +1,7 @@
 import pygame
 from random import *
 
+
 def spawnCell(res, size, pos):
     cell = Cell(res, size)
     cell.posx = pos[0]
@@ -40,3 +41,15 @@ class Cell():
 
     def draw(self, display):
         pygame.draw.circle(display, self.color, (self.posx, self.posy), self.size, width=0)
+
+    def eat(self):
+        pass
+        
+    def die(self):
+        pass
+
+    def run(self):
+        pass
+
+    def logic(self):
+        pass
