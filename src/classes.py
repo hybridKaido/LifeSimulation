@@ -16,18 +16,22 @@ class Cell():
         self.size = size
         self.mx = 0
         self.my = 0
-        self.ttm = randrange(2, 5)
+        self.ttm = 1
         self.ground = ground
+        self.tick = 0
 
     def changeDir(self):
         self.mx = randrange(-1, 2)
         self.my = randrange(-1, 2)
 
-    def move(self):
+    def move(self, fps):
+        self.tick += 1
         self.posx += self.mx
         self.posy += self.my
-        
-        self.changeDir() 
+
+        if(self.tick > fps * self.ttm):
+            self.changeDir()
+            self.tick = 0
 
     def draw(self, display):
         pygame.draw.circle(display, self.color, (self.posx, self.posy), self.size, width=0)

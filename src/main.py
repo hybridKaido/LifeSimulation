@@ -19,7 +19,7 @@ while run:
     
     for cell in Cells:
         cell.draw(display)
-        cell.move()
+        cell.move(fps)
     pygame.display.flip()
 
 pygame.quit()
