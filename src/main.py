@@ -15,13 +15,13 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            cell = spawnCell(res, 5, (pygame.mouse.get_pos()))
+            cell = spawnCell(res, (pygame.mouse.get_pos()))
             Cells.append(cell)
     
     for cell in Cells:
         cell.draw(display)
         cell.move(fps)
-        cell.logic(Cells)
+        cell.logic(Cells, fps)
     pygame.display.flip()
 
 pygame.quit()
