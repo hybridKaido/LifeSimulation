@@ -26,8 +26,13 @@ class Cell():
 
     def move(self, fps):
         self.tick += 1
-        self.posx += self.mx
-        self.posy += self.my
+        if self.posx + self.mx >= self.ground[0] or self.posx + self.mx <= 0:
+            self.mx = -self.mx
+        if self.posy + self.my >= self.ground[1] or self.posy + self.my <= 0:
+            self.my  = -self.my
+        else:
+            self.posx += self.mx
+            self.posy += self.my
 
         if(self.tick > fps * self.ttm):
             self.changeDir()
