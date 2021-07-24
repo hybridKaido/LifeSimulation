@@ -21,6 +21,7 @@ while run:
     for cell in Cells:
         cell.draw(display)
         cell.move(fps)
+        cell.logic(Cells)
     pygame.display.flip()
 
 pygame.quit()

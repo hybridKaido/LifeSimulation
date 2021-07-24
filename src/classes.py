@@ -1,6 +1,11 @@
 import pygame
 from random import *
+import math
 
+
+def calculateDistance(x1,y1,x2,y2):
+    dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    return dist
 
 def spawnCell(res, size, pos):
     cell = Cell(res, size)
@@ -20,6 +25,9 @@ class Cell():
         self.ttm = 1
         self.ground = ground
         self.tick = 0
+        self.health = randrange(70, 120)
+        self.attackPower = randrange(10, 25)
+        self.isDead = False
 
     def changeDir(self):
         self.mx = randrange(-1, 2)
@@ -42,14 +50,18 @@ class Cell():
     def draw(self, display):
         pygame.draw.circle(display, self.color, (self.posx, self.posy), self.size, width=0)
 
-    def eat(self):
-        pass
+    def eat(self, target):
+        target.health -= self.attackPower
         
-    def die(self):
-        pass
+    def die(self, Cells):
+        if(self.health < 0):
+            Cells.remove(self)
 
     def run(self):
         pass
 
-    def logic(self):
-        pass
+    def logic(self, Cells):
+        for cell in Cells:
+            if((calculateDistance(self.posx, self.posy, cell.posx, cell.posy) < 10) and len(Cells) > 1 and cell != self):
+                cell.eat(cell)
+                cell.die(Cells)
